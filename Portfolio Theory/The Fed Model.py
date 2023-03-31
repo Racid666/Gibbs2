@@ -1,38 +1,47 @@
-import pandas as pd
-import matplotlib.pyplot as plt
+import tkinter as tk
 
-# Define the Fed Model formula
-def fed_model(earnings_yield, treasury_yield):
-    return earnings_yield - treasury_yield
+# Define function to calculate Fed Model
+def calculate_fed_model():
+    earnings = float(earnings_entry.get())
+    R10 = float(R10_entry.get())
+    earnings_yield = earnings / market_cap
+    spread = earnings_yield - R10
+    if spread > 0:
+        result_label.config(text="Stocks are offering a higher yield than bonds")
+    else:
+        result_label.config(text="Bonds are offering a higher yield than stocks")
+    spread_label.config(text="Spread: {:.2f}%".format(spread*100))
 
-# Load the Treasury yield curve data from a CSV file
-treasury_data = pd.read_csv("treasury_yield_curve.csv", index_col=0)
+# Create GUI window
+root = tk.Tk()
+root.title("Fed Model Calculator")
 
-# Define the maturities to use for the analysis (in years)
-maturities = [2, 5, 10, 30]
+# Create input fields for earnings and R10
+earnings_label = tk.Label(root, text="Total earnings of the S&P 500 index:")
+earnings_label.pack()
+earnings_entry = tk.Entry(root)
+earnings_entry.pack()
 
-# Plot the Treasury yield curve
-for maturity in maturities:
-    plt.plot(treasury_data.index, treasury_data[str(maturity) + " YR"], label=str(maturity) + " Year")
+R10_label = tk.Label(root, text="Yield on the 10-year Treasury bond:")
+R10_label.pack()
+R10_entry = tk.Entry(root)
+R10_entry.pack()
 
-plt.title("Treasury Yield Curve")
-plt.xlabel("Date")
-plt.ylabel("Yield")
-plt.legend()
-plt.show()
+# Create button to calculate Fed Model
+calculate_button = tk.Button(root, text="Calculate", command=calculate_fed_model)
+calculate_button.pack()
 
-# Load the earnings data for a stock
-earnings_yield = 0.05  # Replace with the actual earnings yield for the stock
+# Create label to display result
+result_label = tk.Label(root, text="")
+result_label.pack()
 
-# Calculate the difference between the earnings yield and the Treasury yield for each maturity
-fed_model_values = {}
-for maturity in maturities:
-    treasury_yield = treasury_data[str(maturity) + " YR"].iloc[-1] / 100
-    fed_model_values[str(maturity) + " Year"] = fed_model(earnings_yield, treasury_yield)
+# Create label to display spread
+spread_label = tk.Label(root, text="")
+spread_label.pack()
 
-# Plot the results of the Fed Model analysis
-plt.bar(fed_model_values.keys(), fed_model_values.values())
-plt.title("Fed Model Analysis")
-plt.xlabel("Maturity")
-plt.ylabel("Earnings Yield - Treasury Yield")
-plt.show()
+# Define market capitalization and Treasury bond rate as constants
+market_cap = 4100000000000
+R10 = 0.03
+
+# Start GUI
+root.mainloop()
