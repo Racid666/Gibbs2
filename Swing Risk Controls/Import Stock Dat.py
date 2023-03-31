@@ -12,6 +12,8 @@ def download_data():
     # Download data from Yahoo Finance
     data = yf.download(ticker, start=start_date, end=end_date)
 
+    data = data.round(2)
+
     # Save data to CSV file
     data.to_csv('stock_data.csv')
 
