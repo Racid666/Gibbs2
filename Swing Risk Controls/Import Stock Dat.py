@@ -2,6 +2,7 @@ import yfinance as yf
 import pandas as pd
 import tkinter as tk
 
+
 # Define function to download stock data
 def download_data():
     # Get input values from GUI
@@ -41,9 +42,10 @@ entry_end_date = tk.Entry(root)
 entry_end_date.grid(row=2, column=1, padx=5, pady=5)
 
 # Set default values
+
 entry_ticker.insert(0, 'AAPL')
-entry_start_date.insert(0, '2021-01-01')
-entry_end_date.insert(0, '2021-12-31')
+entry_start_date.insert(0, '2022-03-29')
+entry_end_date.insert(0, '2023-03-29')
 
 # Create download button
 button_download = tk.Button(root, text='Download', command=download_data)
