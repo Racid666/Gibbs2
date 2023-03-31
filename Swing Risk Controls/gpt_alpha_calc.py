@@ -11,8 +11,9 @@ ticker = 'AAPL'
 start_date = '2023-01-01'
 end_date = '2023-01-31'
 
-# Use the Pandas DataReader to retrieve the stock price data and the S&P 500 price data for the same period
-index_data = yfin.download('GSPC', start=start_date, end=end_date)
+#  note - GSPC fixed to ^GSPC ...
+#  Use the Pandas DataReader to retrieve the stock price data and the S&P 500 price data for the same period
+index_data = yfin.download('^GSPC', start=start_date, end=end_date)
 stock_data = yfin.download(ticker, start=start_date, end=end_date)
 # index_data = pdr.get_data_yahoo('^GSPC', start_date, end_date)
 
