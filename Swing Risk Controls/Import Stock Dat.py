@@ -43,7 +43,7 @@ entry_end_date.grid(row=2, column=1, padx=5, pady=5)
 
 # Set default values
 
-entry_ticker.insert(0, 'AAPL')
+entry_ticker.insert(0, 'SRC')
 entry_start_date.insert(0, '2022-03-29')
 entry_end_date.insert(0, '2023-03-29')
 

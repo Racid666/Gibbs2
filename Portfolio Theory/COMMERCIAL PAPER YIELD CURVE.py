@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import tkinter as tk
 from tkinter import messagebox
 
+
 class CommercialPaperYieldCurve(tk.Frame):
     def __init__(self, master=None):
         super().__init__(master)

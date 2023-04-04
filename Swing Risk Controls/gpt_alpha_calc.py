@@ -5,11 +5,11 @@ import yfinance as yfin
 # yfin.pdr_override()
 
 # Define the stock ticker symbol
-ticker = 'AAPL'
+ticker = 'SRC'
 
 # Define the start and end dates for the period of analysis
 start_date = '2023-01-01'
-end_date = '2023-01-31'
+end_date = '2023-03-30'
 
 #  note - GSPC fixed to ^GSPC ...
 #  Use the Pandas DataReader to retrieve the stock price data and the S&P 500 price data for the same period
@@ -22,7 +22,7 @@ stock_returns = stock_data['Adj Close'].pct_change()
 index_returns = index_data['Adj Close'].pct_change()
 
 # Define the risk-free rate (as a decimal)
-risk_free_rate = 0.01
+risk_free_rate = 3.55
 
 # Calculate the stock's beta using linear regression
 covariance = stock_returns.cov(index_returns)

@@ -1,12 +1,21 @@
+import yfinance as yf
+import pandas as pd
 import numpy as np
 
-# For a PORTFOLIO of ASSETS.
+# Replace 'AAPL' with the stock symbol you want to evaluate
+stock_symbol = 'MRC'
 
-# Define the asset returns and weights
-asset_returns = np.array([0.05, 0.08, 0.12, 0.10])
-weights = np.array([0.2, 0.3, 0.4, 0.1])
+# Download historical stock data
+stock_data = yf.download(stock_symbol, start='2022-01-01', end='2023-01-01')
 
-# Calculate the expected return
-expected_return = np.dot(asset_returns, weights)
+# Calculate daily returns
+stock_data['Daily Return'] = stock_data['Adj Close'].pct_change()
+print(dir(stock_data))
+# Calculate average daily return
+average_daily_return = stock_data['Daily Return'].mean()
 
-print("The expected return of the portfolio is:", expected_return)
+# Calculate annualized return
+annualized_return = (1 + average_daily_return) ** 252 - 1
+
+# Print expected return
+print(f"The expected annualized return for {stock_symbol} is: {annualized_return * 100:.2f}%")
